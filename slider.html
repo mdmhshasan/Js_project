@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/fontawesome.min.css">
+    <title>slider javasceipt</title>
+    <style>
+        body {
+
+            margin: 0;
+            padding: 0;
+        }
+
+        .slider_box {
+            width: 100%;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider {
+            width: 700px;
+            height: 400px;
+            margin: 10px;
+            position: absolute;
+            overflow: hidden;
+            left: 140px;
+            margin: auto;
+            opacity: 0;
+            transform: translateX(90%);
+            box-shadow: 0 0 10px deepskyblue;
+            border-radius: 10px;
+        }
+        .slider.active{
+            opacity: 1;
+            transition: .5s;
+            animation-delay: .5s;
+            animation-direction: .6s;
+            transform: translateX(-10px);
+        }
+
+        .slider img {
+            width: 100%;
+            height: auto;
+            
+        }
+
+        button {
+            z-index: 10;
+            position: relative;
+            top: 35%;
+            left: 30px;
+            border: none;
+            padding: 20px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow:-5px -5px 15px #00bfff63, 5px 5px 10px #00bfff40;
+            background: #fff;
+        }
+        .next {
+
+            position: relative;
+            float: right;
+            left: -90px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="slider_box">
+        <button onclick="prev()"><i class="fa fa-arrow-alt-circle-left"></i></button>
+        <div class="slider active" ><img src="img/hero-2.jpg"></div>
+        <div class="slider "><img src="img/hero-3.jpg"></div>
+        <div class="slider "><img src="img/rost.png"></div>
+        <div class="slider " ><img src="img/testi-bg.jpg"></div>
+        <div class="slider "><img src="img/img1.jpg"></div>
+        <div class="slider "><img src="img/senguig.png"></div>
+        <button onclick="next()" class="next"><i class="fa fa-arrow-alt-circle-right"></i></button>
+    </div>
+    <script>
+    
+        ////next area function
+          function next(){
+         if(document.getElementsByClassName('slider')[0].classList.contains("active")){
+            document.getElementsByClassName('slider')[1].classList.add("active");
+             document.getElementsByClassName('slider')[0].classList.remove("active");
+        }
+        else if(document.getElementsByClassName('slider')[1].classList.contains("active")){
+            document.getElementsByClassName('slider')[2].classList.add("active");
+             document.getElementsByClassName('slider')[1].classList.remove("active");
+        }
+        else if(document.getElementsByClassName('slider')[2].classList.contains("active")){
+            document.getElementsByClassName('slider')[3].classList.add("active");
+             document.getElementsByClassName('slider')[2].classList.remove("active");
+        }
+        else if(document.getElementsByClassName('slider')[3].classList.contains("active")){
+            document.getElementsByClassName('slider')[4].classList.add("active");
+             document.getElementsByClassName('slider')[3].classList.remove("active");
+        }
+        else if(document.getElementsByClassName('slider')[4].classList.contains("active")){
+            document.getElementsByClassName('slider')[5].classList.add("active");
+             document.getElementsByClassName('slider')[4].classList.remove("active");
+        }
+       else if(document.getElementsByClassName('slider')[5].classList.contains("active")){
+            document.getElementsByClassName('slider')[0].classList.add("active");
+             document.getElementsByClassName('slider')[5].classList.remove("active");
+        }
+        }
+        ////prev function 
+        
+        function prev(){
+            
+        if(document.getElementsByClassName('slider')[5].classList.contains("active")){
+            document.getElementsByClassName('slider')[4].classList.add("active");
+             document.getElementsByClassName('slider')[5].classList.remove("active");
+        }
+        else if(document.getElementsByClassName('slider')[4].classList.contains("active")){
+            document.getElementsByClassName('slider')[3].classList.add("active");
+             document.getElementsByClassName('slider')[4].classList.remove("active");
+        }
+        else if(document.getElementsByClassName('slider')[3].classList.contains("active")){
+            document.getElementsByClassName('slider')[2].classList.add("active");
+             document.getElementsByClassName('slider')[3].classList.remove("active");
+        }
+        else if(document.getElementsByClassName('slider')[2].classList.contains("active")){
+            document.getElementsByClassName('slider')[1].classList.add("active");
+             document.getElementsByClassName('slider')[2].classList.remove("active");
+        }
+        else if(document.getElementsByClassName('slider')[1].classList.contains("active")){
+            document.getElementsByClassName('slider')[0].classList.add("active");
+             document.getElementsByClassName('slider')[1].classList.remove("active");
+        }
+       else if(document.getElementsByClassName('slider')[0].classList.contains("active")){
+            document.getElementsByClassName('slider')[5].classList.add("active");
+             document.getElementsByClassName('slider')[0].classList.remove("active");
+        }
+            
+            
+        }
+        
+        
+        
+    setInterval(function(){
+        if(document.getElementsByClassName('slider')[0].classList.contains("active")){
+            document.getElementsByClassName('slider')[1].classList.add("active");
+             document.getElementsByClassName('slider')[0].classList.remove("active");
+        }
+        else if(document.getElementsByClassName('slider')[1].classList.contains("active")){
+            document.getElementsByClassName('slider')[2].classList.add("active");
+             document.getElementsByClassName('slider')[1].classList.remove("active");
+        }
+        else if(document.getElementsByClassName('slider')[2].classList.contains("active")){
+            document.getElementsByClassName('slider')[3].classList.add("active");
+             document.getElementsByClassName('slider')[2].classList.remove("active");
+        }
+        else if(document.getElementsByClassName('slider')[3].classList.contains("active")){
+            document.getElementsByClassName('slider')[4].classList.add("active");
+             document.getElementsByClassName('slider')[3].classList.remove("active");
+        }
+        else if(document.getElementsByClassName('slider')[4].classList.contains("active")){
+            document.getElementsByClassName('slider')[5].classList.add("active");
+             document.getElementsByClassName('slider')[4].classList.remove("active");
+        }
+       else if(document.getElementsByClassName('slider')[5].classList.contains("active")){
+            document.getElementsByClassName('slider')[0].classList.add("active");
+             document.getElementsByClassName('slider')[5].classList.remove("active");
+        }
+        
+    },3000)
+    
+        
+        
+        
+    
+    </script>
+</body>
+
+</html>

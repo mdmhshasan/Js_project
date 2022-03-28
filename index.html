@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoLIsT</title>
+    <link rel="stylesheet" href="css/fontawesome.min.css" />
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            background: #000;
+        }
+
+        section {
+            width: 100%;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+
+        /*
+        .doto_box{
+            box-shadow: 0 0 5px #333;
+            background: #fff;
+            border-radius: 5px;
+            display: inline-block;
+        }
+*/
+        .doto_box .task_box .task_list {
+            margin-top: 10px;
+            box-shadow: 0 0 10px #bbb;
+            background: #ff00ffb5;
+            padding: 20px 10px;
+            transition-delay: .5s;
+            border-radius: 5px;
+        }
+
+        .task_box {
+            margin-top: 10px;
+            transition: .5s;
+        }
+
+        .task_list p {
+
+            margin: 0;
+            padding: 0;
+            color: #000;
+            font-family: serif;
+            display: inline-block;
+        }
+
+        .task_list h5 {
+            margin: 0;
+            padding: 0;
+            color: #000;
+            font-family: sans-serif;
+            font-size: 20px;
+            text-transform: capitalize;
+            display: inline-block;
+        }
+
+        .input_box input {
+            border: none;
+            padding: 10px 20px;
+            border: 1px solid blue;
+            width: 100%;
+            font-size: 16px;
+            outline: none;
+            border-radius: 5px;
+            text-transform: capitalize;
+            transition: .5s;
+        }
+
+        .input_box label {
+            padding: 10px;
+            background: #fff;
+            font-size: 16px;
+            text-transform: capitalize;
+            color: #000;
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .task_list span {
+            font-size: 20px;
+            color: red;
+            display: inline-block;
+            padding: 5px;
+            background: #000;
+            margin-left: 10px;
+            vertical-align: middle;
+            margin-top: -20px;
+            cursor: pointer;
+            float: right;
+            border-radius: 5px;
+            transition: .5s;
+        }
+
+        .task_list span i:nth-child(1) {
+            color: aqua;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .task_list span i:nth-child(1) {
+            color: #44ff18;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .task_list img {
+            width: 50px;
+            height: 50px;
+            float: left;
+            float: right;
+            border-radius: 50%;
+            vertical-align: middle;
+            margin-top: -24px;
+            border-radius: 0;
+
+        }
+
+        .input_box input[type='file'] {
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .img-box {
+            position: relative;
+            float: right;
+        }
+        .alert{
+            background: #109c5b;
+            padding: 0;
+            margin: 0;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 10px;
+            padding: 5px;
+            font-size: 16px;
+            text-transform: capitalize;
+            text-align: center;
+            color: #fff;
+            letter-spacing: 1px;
+            font-weight: bold;
+            opacity: 0;
+            display: inline-block;
+            margin-top: -50px;
+        }
+        .alert.aleradd{
+            transition: .5s;
+            opacity: 1;
+            margin-top: 0;
+        }
+        h3{
+            text-transform: capitalize;
+            font-weight: bolder;
+            color: #fff;
+        }
+        h1{
+            color: aliceblue;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="doto_box">
+               <h1>welcome to our new todo app</h1>
+            <div class="input_box">
+                <input type="text" placeholder="type your task..." />
+                <p class="alert">your task is added..👍</p>
+                <label class="upload" for="upload">upload</label>
+                <input type="file" id="upload" multiple hidden />
+            </div><br>
+            <!--incomplited task-->
+            <h3>incomplited task..</h3>
+            <div class="task_box">
+            </div>
+            <!--complited task-->
+            <h3>complited task..</h3>
+            <div class="task_box complited_task">
+            </div>
+        </div>
+    </section>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script>
+        //        var edite = document.getElementById("edite");
+        var upload = document.querySelector(".upload");
+        var inputupload = document.getElementById("upload")
+        var inputval = document.querySelector("input");
+        var task_box = document.querySelector(".task_box");
+        var delet = document.querySelector('.delete3');
+        var alertbox=document.querySelector(".alert");
+        var complited_task = document.querySelector(".complited_task");
+        inputval.addEventListener('keypress', function(e) {
+            if (e.keyCode == 13 && inputval.value!=='' && inputupload!='') {
+                task_box.innerHTML += `
+             <div class="task_list">
+                    <h5>dotdy work list</h5><br>
+                    <p>${inputval.value}</p>
+                    <span>
+                        <i id="edite" class="fa fa-check" onclick="editebtn();"></i>
+                        <i class="fa fa-trash-alt" onclick="deletbtn();"></i>
+                    </span>
+                </div>
+                `;
+                
+                uploadImage()
+            }
+           
+        })
+
+////////deleting box area
+        function deletbtn() {
+            document.querySelector(".task_list").remove();
+             alertbox.classList.remove("aleradd");
+        }
+////////////editing box area
+        function editebtn() {
+              alertbox.classList.add("aleradd");
+            ////set time out function
+            setTimeout(()=>{
+               alertbox.classList.remove("aleradd");
+            },2000);
+            ////ending time function 
+            document.querySelector(".task_list").appendChild(img);
+            var html = `
+                <div class="task_list">
+                    <h5>dotdy work list</h5><br>
+                    <p>${inputval.value}</p>
+                    <span>
+                        <i class="fa fa-trash-alt" onclick="deletbtn();"></i>
+                    </span>
+                    <div class='img-box'></div>
+                </div>
+
+                  `;
+            complited_task.innerHTML += html;
+            var imgbox = document.querySelector(".img-box").appendChild(img);
+            var taskLIst = document.querySelector(".task_list").remove();
+        }
+        var img = document.createElement("img");
+///////image uploading function
+        function uploadImage() {
+            inputupload.addEventListener("change", function() {
+                var reader = new FileReader();
+                reader.addEventListener("load", function() {
+                    var reasutl = reader.result;
+                    img.src = reasutl;
+                    var tasklist=document.querySelector(".task_list");
+                    tasklist.appendChild(img);
+                  
+                })
+
+                reader.readAsDataURL(this.files[0])
+            })
+
+        }
+        uploadImage()
+
+    </script>
+</body>
+
+</html>
